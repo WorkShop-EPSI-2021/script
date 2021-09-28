@@ -6,12 +6,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 
-class FeelingAnalyzer:        
-
-    def myfun(self):
-        return 1
+class FeelingAnalyzer:
         
-    def loadModel(self, verbose):
+    def loadModel(verbose):
         
         # Importing and reading the Dataset
         dataset_feeling_file = 'dataset_feeling.csv'
