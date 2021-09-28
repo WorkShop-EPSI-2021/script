@@ -1,8 +1,6 @@
 import json
 from spellchecker import SpellChecker
 
-our_mail = '{"objet" : "Support NETFLIX", "text": "Bonjour , Nous n\'avons pas pu autoriser votre paiement pour le prochain cycle de facturation de votre abonnement. Nous serions bien évidemment très heureux de vous compter à nouveau parmi nous. cliquez simplement sur, réactivez simplement votre abonnement pour profiter des meilleurs films et séries TV sans interruption. RÉACTIVER L\'ABONNEMENT. Nous sommes là pour vous aider. Pour plus d\'informations, consultez le Centre d\'aide ou contactez-nous. L\'équipe Netflix"}'
-
 
 def Mail_ML (mail_recup):
 
@@ -62,10 +60,17 @@ def Mail_ML (mail_recup):
         if (corrected_all_words[i]!=all_words[i]):
             count_errors+=1
 
-    print ("Il y a " + str(count_errors) + " erreurs")
 
-    print('{"score1": "15%", "scores2": "80%"}')
-
+    print('{"Erreur":'+ str(count_errors)+'}')
 
 
-Mail_ML(our_mail)
+
+
+our_mail1 = '{"objet" : "Support NETFLIX", "text": "Bonjour , Nous n\'avons pas pu autoriser votre paiement pour le prochain cycle de facturation de votre abonnement. Nous serions bien évidemment très heureux de vous compter à nouveau parmi nous. cliquez simplement sur, réactivez simplement votre abonnement pour profiter des meilleurs films et séries TV sans interruption. RÉACTIVER L\'ABONNEMENT. Nous sommes là pour vous aider. Pour plus d\'informations, consultez le Centre d\'aide ou contactez-nous. L\'équipe Netflix"}'
+Mail_ML(our_mail1)
+
+our_mail2 = '{"objet" : "Support NETFLIX", "text": "Souhaitez-vous garder votre compte Disney ? Nous venons de détecter que votre moyen de paiement n\'est plus valide. Sans nouvelle source de paiement de votre part, votre abonnement sera résilié et vous serez facturé 29.99 conformément à la Loi sur la consommation adoptée en Février 2014. Configuration de paiement Nous suivre Facebook Twitter Link Pour plus d\'informations, Veuillez consulter notre Centre d\'aide.  2021 Disney et toutes ses entités associées. Tous droits réservés"}'
+Mail_ML(our_mail2)
+
+our_mail3 = '{"objet" : "Support NETFLIX", "text": Bonjour, Lors de votre dernier achat ,vous avez été averti par un message qui vous informe de l\'obligation d\'adhérer à la nouvelle réglementation   Concernant la fiabilité pour les achats par carte bancaire sur internet . la mise en place d\'un arrêt pour vos futurs achats. A ce jour, nous n\'avons pas reçu d\'adhésion de votre part et nous sommes au regret de vous informer que vous ne pouvez plus utiliser votre carte sur internet. Faites votre demande d\'adhésion en ligne en cliquant ici Crédit agricole ca Ce message est généré automatiquement, merci de ne pas y répondre, il ne pourra pas être lu.   Société Anonyme à Directoire et Conseil de Surveillance au capital de 4 046 407 595 euros Siège social et adresse postale : 115, rue de Sèvres  75 275 Paris Cedex 06 RCS Paris 421 100 645  Code APE 6419Z, intermédiaire d\'assurance, immatriculé à l\'ORIAS sous le n° 07 023 424"}'
+Mail_ML(our_mail3)
