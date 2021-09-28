@@ -15,21 +15,32 @@ mail_text=text["text"]
 
 
 
-new_text=str()
-for i in range(0,len(mail_text),1):
-    if (mail_text[i+1]!="'"):
-        print(mail_text[i])
-        # new_text+=mail_text[i]
+new_text=""
+foundForbiddenChar = False
+for i in range(0, len(mail_text), 1):
+    # end of text mail
+    if (i+1 == len(mail_text)):
+        new_text = new_text + mail_text[i]
+        break
+    
+    if (mail_text[i+1]!="'" and mail_text[i+1]!=","):
+        if not foundForbiddenChar :
+            new_text += mail_text[i]
+            foundForbiddenChar = False
+        else :
+            foundForbiddenChar = False
+    else :
+        foundForbiddenChar = True
+
+
 print(new_text)
 
         
-
 
 spell = SpellChecker(language='fr')
 # print(spell.correction("bojour"))
 
 l=mail_text.split()
-print(l)
 
 new_l=[]
 for i in range (0,len(l),1):
