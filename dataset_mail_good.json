@@ -1,0 +1,16 @@
+{
+    "mails" : 
+    [
+        {
+            "id": 1,
+            "objet" : "xxx", 
+            "text": "xxx"
+        }, 
+        {
+            "id": 2,
+            "objet" : "xxx", 
+            "text": "xxx"
+        }   
+        
+    ]
+}
