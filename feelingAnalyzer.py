@@ -127,8 +127,8 @@ class FeelingAnalyzer:
         y_feeeling_predictions = clf.predict(X_test)
 
         if (verbose):
-            print('\n*************************** Confusion matrix ****************************\n\n', confusion_matrix(y_test,y_feeeling_predictions))
-            print('\n**************************** Classification report **********************\n\n', classification_report(y_test,y_feeeling_predictions))
+            print('\n*************************** Confusion matrix (positivity) ****************************\n\n', confusion_matrix(y_test,y_feeeling_predictions))
+            print('\n**************************** Classification report (positivity) **********************\n\n', classification_report(y_test,y_feeeling_predictions))
             print("\nModel accuracy =", accuracy_score(y_test, y_feeeling_predictions)*100, "%\n\n")
 
         
@@ -136,13 +136,21 @@ class FeelingAnalyzer:
         x_mail_text_to_predict = mailToAnalyse
         x_mail_text_to_predict_list = [x_mail_text_to_predict]
         x_mail_text_to_predict_vector = vectorizer.transform(x_mail_text_to_predict_list)
-        print("Prediction positivity avec clf :", clf.predict(x_mail_text_to_predict_vector)[0])
-        print("Prediction positivity avec text_classifier : ", text_classifier.predict(x_mail_text_to_predict_vector)[0])
+        
+        predictionWithClf = clf.predict(x_mail_text_to_predict_vector)[0]
+        predictionWithRandomForest = text_classifier.predict(x_mail_text_to_predict_vector)[0]
+
+        
+        print("Prediction positivity avec clf :", predictionWithClf)
+        print("Prediction positivity avec text_classifier : ", predictionWithRandomForest)
+        
+        listResultats = [predictionWithClf, predictionWithRandomForest]
+        return listResultats
 
     def predictMailFeeling_Alarming(verbose, mailToAnalyse):
         
         # Importing and reading the Dataset
-        dataset_feeling_file = 'dataset_feeling.csv'
+        dataset_feeling_file = 'dataset_feeling_alarming.csv'
         feelings_messages = pd.read_csv(dataset_feeling_file)
 
         x_features_mailText = feelings_messages.iloc[:, 2].values
@@ -177,8 +185,8 @@ class FeelingAnalyzer:
         y_feeeling_predictions = clf.predict(X_test)
 
         if (verbose):
-            print('\n*************************** Confusion matrix ****************************\n\n', confusion_matrix(y_test,y_feeeling_predictions))
-            print('\n**************************** Classification report **********************\n\n', classification_report(y_test,y_feeeling_predictions))
+            print('\n*************************** Confusion matrix (alarming) ****************************\n\n', confusion_matrix(y_test,y_feeeling_predictions))
+            print('\n**************************** Classification report (alarming) **********************\n\n', classification_report(y_test,y_feeeling_predictions))
             print("\nModel accuracy =", accuracy_score(y_test, y_feeeling_predictions)*100, "%\n\n")
 
         
@@ -186,13 +194,22 @@ class FeelingAnalyzer:
         x_mail_text_to_predict = mailToAnalyse
         x_mail_text_to_predict_list = [x_mail_text_to_predict]
         x_mail_text_to_predict_vector = vectorizer.transform(x_mail_text_to_predict_list)
-        print("Prediction alarming avec clf :", clf.predict(x_mail_text_to_predict_vector)[0])
-        print("Prediction alarming avec text_classifier : ", text_classifier.predict(x_mail_text_to_predict_vector)[0])
+        
+        predictionWithClf = clf.predict(x_mail_text_to_predict_vector)[0]
+        predictionWithRandomForest = text_classifier.predict(x_mail_text_to_predict_vector)[0]
+
+        
+        print("Prediction positivity avec clf :", predictionWithClf)
+        print("Prediction positivity avec text_classifier : ", predictionWithRandomForest)
+        
+        listResultats = [predictionWithClf, predictionWithRandomForest]
+        return listResultats
+        
 
     def predictMailFeeling_Engaging(verbose, mailToAnalyse):
         
         # Importing and reading the Dataset
-        dataset_feeling_file = 'dataset_feeling.csv'
+        dataset_feeling_file = 'dataset_feeling_engaging.csv'
         feelings_messages = pd.read_csv(dataset_feeling_file)
 
         x_features_mailText = feelings_messages.iloc[:, 2].values
@@ -227,8 +244,8 @@ class FeelingAnalyzer:
         y_feeeling_predictions = clf.predict(X_test)
 
         if (verbose):
-            print('\n*************************** Confusion matrix ****************************\n\n', confusion_matrix(y_test,y_feeeling_predictions))
-            print('\n**************************** Classification report **********************\n\n', classification_report(y_test,y_feeeling_predictions))
+            print('\n*************************** Confusion matrix (engaging) ****************************\n\n', confusion_matrix(y_test,y_feeeling_predictions))
+            print('\n**************************** Classification report (engaging) **********************\n\n', classification_report(y_test,y_feeeling_predictions))
             print("\nModel accuracy =", accuracy_score(y_test, y_feeeling_predictions)*100, "%\n\n")
 
         
@@ -236,5 +253,13 @@ class FeelingAnalyzer:
         x_mail_text_to_predict = mailToAnalyse
         x_mail_text_to_predict_list = [x_mail_text_to_predict]
         x_mail_text_to_predict_vector = vectorizer.transform(x_mail_text_to_predict_list)
-        print("Prediction engaging avec clf :", clf.predict(x_mail_text_to_predict_vector)[0])
-        print("Prediction engaging avec text_classifier : ", text_classifier.predict(x_mail_text_to_predict_vector)[0])
+        
+        predictionWithClf = clf.predict(x_mail_text_to_predict_vector)[0]
+        predictionWithRandomForest = text_classifier.predict(x_mail_text_to_predict_vector)[0]
+
+        
+        print("Prediction positivity avec clf :", predictionWithClf)
+        print("Prediction positivity avec text_classifier : ", predictionWithRandomForest)
+        
+        listResultats = [predictionWithClf, predictionWithRandomForest]
+        return listResultats

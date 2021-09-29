@@ -1,18 +1,18 @@
 id,sentiment,message
-1,neutral,bonjour comment allez-vous?
-2,neutral,nous avons constaté que votre compte
-3,negative,je ne me sens pas bien
-4,negative,malheureusement nous ne pouvons pas accéder
-5,negative,nous sommes désolés de vous informer
-6,negative,A ce jour nous n'avons pas reçu d'adhésion de votre part 
-7,positive,c'est génial
-8,positive,nous sommes heureux de vous annoncer
-9,engaging,veuillez vous enregister
-10,engaging,A ce jour nous n'avons pas reçu d'adhésion de votre part 
-11,engaging,Faites votre demande d'adhésion en ligne en cliquant ici
-12,engaging,Nous vous demandons de vous connecter
-13,engaging,Connectez-vous à votre compte pour activer
-14,alarming,votre compte a été bloqué
-15,alarming,nous sommes au regret de vous informer
-16,alamring,vous ne pouvez plus utiliser votre carte sur internet
-17,alarming,vos moyens de paiement
+1,alarming,votre compte a été bloqué
+2,alarming,nous sommes au regret de vous informer
+3,alarming,vous ne pouvez plus utiliser votre carte sur internet
+4,alarming,vos moyens de paiement
+5,alarming,Dépêchez-vous le nombre de lots à gagner est limité!
+6,alarming,Nous n'avons pas pu autoriser votre paiement pour le prochain cycle de facturation de votre abonnement
+7,alarming,Vous avez la chance unique de participer à notre tombola et de gagner un bon d'achat
+8,alarming,Félicitations vous êtes l'heureux gagnant!
+9,alarming,Dépêchez-vous le nombre de lots que vous pouvez gagner est limité !
+10,alarming,Toutes nos félicitations !
+11,not alarming,Afin de finaliser votre candidature vous devez valider votre adresse e-mail en cliquant simplement sur le bouton bleu ci-dessous
+12,alarming,vous êtes sélectionnés parmi les cent personnes
+13,not alarming,ne manquez pas les 2 sessions dédiées aux applications
+14,not alarming,Valider ma candidature
+15,not alarming,Voici la lettre d’information sur l’actualité de la botanique francophone
+16,not alarming,Cette lettre présente une sélection des articles et événements publiés
+17,not alarming, Nous serions bien évidemment très heureux de vous compter à nouveau parmi nous.
