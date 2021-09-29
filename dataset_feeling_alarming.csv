@@ -1,0 +1,18 @@
+id,sentiment,message
+1,neutral,bonjour comment allez-vous?
+2,neutral,nous avons constaté que votre compte
+3,negative,je ne me sens pas bien
+4,negative,malheureusement nous ne pouvons pas accéder
+5,negative,nous sommes désolés de vous informer
+6,negative,A ce jour nous n'avons pas reçu d'adhésion de votre part 
+7,positive,c'est génial
+8,positive,nous sommes heureux de vous annoncer
+9,engaging,veuillez vous enregister
+10,engaging,A ce jour nous n'avons pas reçu d'adhésion de votre part 
+11,engaging,Faites votre demande d'adhésion en ligne en cliquant ici
+12,engaging,Nous vous demandons de vous connecter
+13,engaging,Connectez-vous à votre compte pour activer
+14,alarming,votre compte a été bloqué
+15,alarming,nous sommes au regret de vous informer
+16,alamring,vous ne pouvez plus utiliser votre carte sur internet
+17,alarming,vos moyens de paiement
