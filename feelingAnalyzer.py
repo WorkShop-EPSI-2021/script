@@ -141,8 +141,8 @@ class FeelingAnalyzer:
         predictionWithRandomForest = text_classifier.predict(x_mail_text_to_predict_vector)[0]
 
         
-        print("Prediction positivity avec clf :", predictionWithClf)
-        print("Prediction positivity avec text_classifier : ", predictionWithRandomForest)
+        if (verbose) : print("Prediction positivity avec clf :", predictionWithClf)
+        if (verbose) : print("Prediction positivity avec text_classifier : ", predictionWithRandomForest)
         
         listResultats = [predictionWithClf, predictionWithRandomForest]
         return listResultats
@@ -199,8 +199,8 @@ class FeelingAnalyzer:
         predictionWithRandomForest = text_classifier.predict(x_mail_text_to_predict_vector)[0]
 
         
-        print("Prediction positivity avec clf :", predictionWithClf)
-        print("Prediction positivity avec text_classifier : ", predictionWithRandomForest)
+        if (verbose) : print("Prediction positivity avec clf :", predictionWithClf)
+        if (verbose) : print("Prediction positivity avec text_classifier : ", predictionWithRandomForest)
         
         listResultats = [predictionWithClf, predictionWithRandomForest]
         return listResultats
@@ -258,8 +258,8 @@ class FeelingAnalyzer:
         predictionWithRandomForest = text_classifier.predict(x_mail_text_to_predict_vector)[0]
 
         
-        print("Prediction positivity avec clf :", predictionWithClf)
-        print("Prediction positivity avec text_classifier : ", predictionWithRandomForest)
+        if (verbose) : print("Prediction positivity avec clf :", predictionWithClf)
+        if (verbose) : print("Prediction positivity avec text_classifier : ", predictionWithRandomForest)
         
         listResultats = [predictionWithClf, predictionWithRandomForest]
         return listResultats

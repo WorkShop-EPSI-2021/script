@@ -119,33 +119,33 @@ def Mail_ML (mail_recup):
     verbose= False,
     mailToAnalyse = corps_mail
     )
-    print(resultPositivity)
+    #print(resultPositivity)
     scorePositivity = 15
     if resultPositivity[0] == "positive" : scorePositivity += 35
     if resultPositivity[1] == "positive" : scorePositivity += 35
-    print("scorePositivity = ", scorePositivity)
+    #print("scorePositivity = ", scorePositivity)
 
 
     resultEngaging = FeelingAnalyzer.predictMailFeeling_Engaging(
         verbose= False,
         mailToAnalyse = corps_mail
     )
-    print(resultEngaging)
+    #print(resultEngaging)
     scoreEngaging = 15
     if resultEngaging[0] == "engaging" : scoreEngaging += 35
     if resultEngaging[1] == "engaging" : scoreEngaging += 35
-    print("scoreEngaging = ", scoreEngaging)
+    #print("scoreEngaging = ", scoreEngaging)
 
 
     resultAlarming = FeelingAnalyzer.predictMailFeeling_Alarming(
         verbose= False,
         mailToAnalyse = corps_mail
     )
-    print(resultAlarming)
+    #print(resultAlarming)
     scoreAlarming = 15
     if resultAlarming[0] == "alarming" : scoreAlarming += 35
     if resultAlarming[1] == "alarming" : scoreAlarming += 35
-    print("scoreAlarming = ", scoreAlarming)
+    #print("scoreAlarming = ", scoreAlarming)
 
     stringResult = {
         "scoreOrthographe": pourcentage_faute,
@@ -159,6 +159,6 @@ def Mail_ML (mail_recup):
 # print("-------------------------------------------------BAD MAILS-----------------------------------------------------")
 
 # print("--------------------1-----------------------")
-#our_mail1='{"objet" : "Support NETFLIX", "text": "Bonjour, Nous n\'avons pas pu autoriser votre paiement pour le prochain cycle de facturation de votre abonnement. Nous serions bien évidemment très heureux de vous compter à nouveau parmi nous. cliquez simplement sur, réactivez simplement votre abonnement pour profiter des meilleurs films et séries TV sans interruption. RÉACTIVER L\'ABONNEMENT. Nous sommes là pour vous aider. Pour plus d\'informations, consultez le Centre d\'aide ou contactez-nous. L\'équipe Netflix"}'
+# our_mail1='{"objet" : "Support NETFLIX", "text": "Bonjour, Nous n\'avons pas pu autoriser votre paiement pour le prochain cycle de facturation de votre abonnement. Nous serions bien évidemment très heureux de vous compter à nouveau parmi nous. cliquez simplement sur, réactivez simplement votre abonnement pour profiter des meilleurs films et séries TV sans interruption. RÉACTIVER L\'ABONNEMENT. Nous sommes là pour vous aider. Pour plus d\'informations, consultez le Centre d\'aide ou contactez-nous. L\'équipe Netflix"}'
 our_mail1=sys.argv[1]
 Mail_ML(our_mail1)
