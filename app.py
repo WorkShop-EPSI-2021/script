@@ -1,16 +1,18 @@
 import json
 from spellchecker import SpellChecker
+from langdetect import detect
+import sys
+from feelingAnalyzer import FeelingAnalyzer
 
 
 def Mail_ML (mail_recup):
 
+    # print(sys.argv)
+
     '''
     La fonction prends en paramètre un Json avec ce que l'on récupère de l'utilisateur 
-
     Elle rends un json avec les scores calculés pendant le machine learning sur la probabilité que le mail soit un faux 
-
     On prends en compte :
-
         - Les fautes d'orthographes présentent dans le mail 
     '''
     # parse json:
@@ -19,6 +21,11 @@ def Mail_ML (mail_recup):
 
     #Objet a corriger
     corps_mail=text["text"]
+
+    '''
+        ANALYSE ORTHOGRAPHE
+    '''
+
 
     new_str=""
     foundForbiddenChar = False
@@ -40,17 +47,29 @@ def Mail_ML (mail_recup):
     # print(new_str)
 
         
+    if (detect(corps_mail)=='fr'):
+        spell = SpellChecker(language='fr')
+        # print(spell.correction("bojour"))
 
-    spell = SpellChecker(language='fr')
-    # print(spell.correction("bojour"))
+        all_words=new_str.split()
 
-    all_words=new_str.split()
+        corrected_all_words=[]
+        for i in range (0,len(all_words),1):
 
-    corrected_all_words=[]
-    for i in range (0,len(all_words),1):
+            #print(spell.correction(l[i]))
+            corrected_all_words.append(spell.correction(all_words[i]))
 
-        #print(spell.correction(l[i]))
-        corrected_all_words.append(spell.correction(all_words[i]))
+    if (detect(corps_mail)=='en'):
+        spell = SpellChecker(language='en')
+        # print(spell.correction("bojour"))
+
+        all_words=new_str.split()
+
+        corrected_all_words=[]
+        for i in range (0,len(all_words),1):
+
+            #print(spell.correction(l[i]))
+            corrected_all_words.append(spell.correction(all_words[i]))
 
 
     # print (corrected_all_words)
@@ -61,16 +80,85 @@ def Mail_ML (mail_recup):
             count_errors+=1
 
 
-    print('{"Erreur":'+ str(count_errors)+'}')
+    
+    if(len(corps_mail)<150 and count_errors>6):
+        pourcentage_faute=80
+
+    if(len(corps_mail)<150 and count_errors<=6):
+        pourcentage_faute=20
+    
+    if(150<len(corps_mail)<450 and count_errors<=8):
+        pourcentage_faute=20
+
+    if(150<len(corps_mail)<450 and 8<count_errors<=10):
+        pourcentage_faute=50
+
+    if(150<len(corps_mail)<450 and count_errors>10):
+        pourcentage_faute=80
+    
+    if(len(corps_mail)>450 and count_errors<=10):
+        pourcentage_faute=20
+    
+    if(len(corps_mail)>450 and 10<count_errors<=15):
+        pourcentage_faute=50
+    
+    if(len(corps_mail)>450 and count_errors>15):
+        pourcentage_faute=80
+    
+
+    #print('{"Erreur":'+ str(pourcentage_faute)+"%"'}')
 
 
 
+    '''
+        ANALYSE SENTIMENTS (Positivity, engaging, alarming)
+    '''
 
-our_mail1 = '{"objet" : "Support NETFLIX", "text": "Bonjour , Nous n\'avons pas pu autoriser votre paiement pour le prochain cycle de facturation de votre abonnement. Nous serions bien évidemment très heureux de vous compter à nouveau parmi nous. cliquez simplement sur, réactivez simplement votre abonnement pour profiter des meilleurs films et séries TV sans interruption. RÉACTIVER L\'ABONNEMENT. Nous sommes là pour vous aider. Pour plus d\'informations, consultez le Centre d\'aide ou contactez-nous. L\'équipe Netflix"}'
+
+    resultPositivity = FeelingAnalyzer.predictMailFeeling_Positivity(
+    verbose= False,
+    mailToAnalyse = corps_mail
+    )
+    print(resultPositivity)
+    scorePositivity = 15
+    if resultPositivity[0] == "positive" : scorePositivity += 35
+    if resultPositivity[1] == "positive" : scorePositivity += 35
+    print("scorePositivity = ", scorePositivity)
+
+
+    resultEngaging = FeelingAnalyzer.predictMailFeeling_Engaging(
+        verbose= False,
+        mailToAnalyse = corps_mail
+    )
+    print(resultEngaging)
+    scoreEngaging = 15
+    if resultEngaging[0] == "engaging" : scoreEngaging += 35
+    if resultEngaging[1] == "engaging" : scoreEngaging += 35
+    print("scoreEngaging = ", scoreEngaging)
+
+
+    resultAlarming = FeelingAnalyzer.predictMailFeeling_Alarming(
+        verbose= False,
+        mailToAnalyse = corps_mail
+    )
+    print(resultAlarming)
+    scoreAlarming = 15
+    if resultAlarming[0] == "alarming" : scoreAlarming += 35
+    if resultAlarming[1] == "alarming" : scoreAlarming += 35
+    print("scoreAlarming = ", scoreAlarming)
+
+    stringResult = {
+        "scoreOrthographe": pourcentage_faute,
+        "scorePositivity": scorePositivity, 
+        "scoreEngaging": scoreEngaging,
+        "scoreAlarming": scoreAlarming
+    }
+
+    print(stringResult)
+
+# print("-------------------------------------------------BAD MAILS-----------------------------------------------------")
+
+# print("--------------------1-----------------------")
+#our_mail1='{"objet" : "Support NETFLIX", "text": "Bonjour, Nous n\'avons pas pu autoriser votre paiement pour le prochain cycle de facturation de votre abonnement. Nous serions bien évidemment très heureux de vous compter à nouveau parmi nous. cliquez simplement sur, réactivez simplement votre abonnement pour profiter des meilleurs films et séries TV sans interruption. RÉACTIVER L\'ABONNEMENT. Nous sommes là pour vous aider. Pour plus d\'informations, consultez le Centre d\'aide ou contactez-nous. L\'équipe Netflix"}'
+our_mail1=sys.argv[1]
 Mail_ML(our_mail1)
-
-our_mail2 = '{"objet" : "Support NETFLIX", "text": "Souhaitez-vous garder votre compte Disney ? Nous venons de détecter que votre moyen de paiement n\'est plus valide. Sans nouvelle source de paiement de votre part, votre abonnement sera résilié et vous serez facturé 29.99 conformément à la Loi sur la consommation adoptée en Février 2014. Configuration de paiement Nous suivre Facebook Twitter Link Pour plus d\'informations, Veuillez consulter notre Centre d\'aide.  2021 Disney et toutes ses entités associées. Tous droits réservés"}'
-Mail_ML(our_mail2)
-
-our_mail3 = '{"objet" : "Support NETFLIX", "text":   Toutes nos félicitations ! Vous avez été sélectionné pour participer à cette enquete. Cela ne prend qu\'une minute et vous obtenez un prix fantastique : le nouveau scooter électrique Xiaomi Mi! OBTENEZ LE MAINTENANT Chaque jour, nous sélectionnons au hasard 10 utilisateurs pour avoir la chance de gagner de superbes prix. Le prix d\'aujourd\'hui est un nouveau scooter électrique Xiaomi Mi! 10 heureux gagnants vont uniquement à ceux qui vivent en France! Cette enquête vise à améliorer le service à nos utilisateurs. Dépêchez-vous, le nombre de lots que vous pouvez gagner est limité! "}'
-Mail_ML(our_mail3)
